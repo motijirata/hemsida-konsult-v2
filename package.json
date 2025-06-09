@@ -6,10 +6,10 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
+    "postinstall": "npm run build",
     "lint": "next lint"
   },
   "dependencies": {
-    "express": "^4.19.2",
     "next": "15.3.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
