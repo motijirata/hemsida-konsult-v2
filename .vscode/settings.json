@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/fcb4a781-ae40-465c-8c52-ca9508d81f0e/resourceGroups/hemsida-konsult-group/providers/Microsoft.Web/sites/motijirata-hemsida",
+    "appService.deploySubpath": "."
+}
