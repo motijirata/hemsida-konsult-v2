@@ -5,7 +5,7 @@ export default function Kontakt() {
   return (
     <Layout>
     {
-         <main className="min-h-screen bg-white text-gray-900 px-6 py-12">
+         <main className="min-h-screen text-gray-900 px-6 py-12">
       <h1 className="text-3xl font-bold text-center mb-8">Kontakta oss</h1>
 
       <section className="max-w-xl mx-auto">

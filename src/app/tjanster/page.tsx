@@ -1,37 +1,47 @@
+import ServiceCard from "@/components/ServiceCard";
 import Layout from "@/components/Layout";
+const services = [
+  {
+    title: "Responsiv hemsida",
+    description: "Mobilanpassad och snygg hemsida som fungerar på alla skärmar.",
+    image: "/images/responsive.jpg",
+    href: "/",
+  },
+  {
+    title: "Bokningssystem",
+    description: "Inbyggd bokning med Calendly eller skräddarsydd lösning.",
+    image: "/images/booking.jpg",
+    href: "/boka",
+  },
+  {
+    title: "Betalningslösning",
+    description: "Ta emot betalningar via Swish eller Klarna.",
+    image: "/images/payment.jpg",
+    href: "/boka",
+  },
+  {
+    title: "Kontaktformulär",
+    description: "Få meddelanden direkt till din e-post via ett anpassat formulär.",
+    image: "/images/contact.jpg",
+    href: "/kontakt",
+  },
+];
 
 
-export default function Tjanster() {
+export default function TjansterPage() {
   return (
-  <Layout> 
-    {
-        <main className="min-h-screen bg-white text-gray-900 px-6 py-12">
-      <h1 className="text-3xl font-bold mb-6 text-center">Våra Tjänster</h1>
-
-      <section className="max-w-3xl mx-auto space-y-8">
-        <div>
-          <h2 className="text-xl font-semibold">✅ Hemsida</h2>
-          <p className="text-gray-700">
-            Vi bygger mobilanpassade och snygga hemsidor för småföretag. Du får en komplett lösning – snabbt och enkelt.
-          </p>
-        </div>
-
-        <div>
-          <h2 className="text-xl font-semibold">📅 Bokningssystem</h2>
-          <p className="text-gray-700">
-            Kunderna kan boka tider direkt via din hemsida. Vi kan använda t.ex. Calendly eller bygga ett eget system.
-          </p>
-        </div>
-
-        <div>
-          <h2 className="text-xl font-semibold">💳 Betalning</h2>
-          <p className="text-gray-700">
-            Vi kopplar in betalning med kort, Swish eller Klarna – så att du får betalt direkt online.
-          </p>
-        </div>
-      </section>
+ <Layout>
+  {
+    <main className="max-w-6xl mx-auto px-4 py-16">
+      <h1 className="text-3xl font-bold mb-8 text-center">Våra Tjänster</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {services.map((service, idx) => (
+          <ServiceCard key={idx} {...service} />
+        ))}
+      </div>
     </main>
-    }</Layout>  
-    
-  );
+     }
+  </Layout>
+    );
+ 
 }

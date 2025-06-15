@@ -1,8 +1,8 @@
 // components/Footer.tsx
 export default function Footer() {
   return (
-    <footer className="bg-white border-t text-center text-sm text-gray-500 py-6 mt-12">
-      &copy; {new Date().getFullYear()} MTK. Alla rättigheter förbehållna.
-    </footer>
+      <footer className="bg-blue-950 text-white text-center py-6 text-sm mt-12">
+        &copy; {new Date().getFullYear()} MTK. Alla rättigheter förbehållna.
+      </footer>
   );
 }
