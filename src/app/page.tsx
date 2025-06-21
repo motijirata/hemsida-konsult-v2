@@ -24,8 +24,14 @@ export default function Home() {
           </div>
 
           {/* Hero Content */}
-          <div className="relative z-10 px-4 w-full max-w-3xl mt-6 md:mt-8">
-            {/* reduced mt-16 md:mt-24 to mt-6 md:mt-8 */}
+          <div className="relative z-10 px-4 w-full max-w-3xl pt-32 sm:pt-40 md:pt-0 mt-0 md:mt-8">
+            {/* 
+              pt-32: pushes text down on mobile
+              sm:pt-40: pushes even more on small screens, adjust as needed
+              md:pt-0: removes padding on desktop for vertical center
+              mt-0: removes extra top margin on mobile
+              md:mt-8: keeps a little margin on desktop if needed
+            */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-blue-900 mb-4 leading-tight drop-shadow animate-fade-in">
               Hjälper småföretag växa digitalt
             </h1>
@@ -42,7 +48,6 @@ export default function Home() {
 
         {/* Services Section */}
         <section className="bg-blue-50 pt-6 pb-12 sm:pt-8 sm:pb-16 md:pt-10 md:pb-20 px-4">
-          {/* reduced top padding: was py-12 sm:py-16 md:py-20 */}
           <div className="max-w-6xl mx-auto text-center">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-900 mb-8 sm:mb-12 animate-fade-in">
               Vad vi erbjuder
