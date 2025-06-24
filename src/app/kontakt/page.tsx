@@ -70,7 +70,7 @@ export default function Home() {
   className="space-y-5"
 >
   {/* Hidden config */}
-  <input type="hidden" name="_next" value="http://localhost:3000/tack" />
+  <input type="hidden" name="_next" value="https://motijirata-hemsida-linux-f0fygjgvdafthsay.swedencentral-01.azurewebsites.net/tack" />
   <input type="hidden" name="_captcha" value="false" />
   <input type="hidden" name="_template" value="table" />
 
