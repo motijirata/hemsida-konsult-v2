@@ -1,13 +1,44 @@
+"use client";
+
 import Layout from "@/components/Layout";
 import Image from "next/image";
-import Link from "next/link";
+import { useState } from "react";
 
-export default function Home() {
+export default function BokaPage() {
+  const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setStatus("loading");
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const data = {
+      name: formData.get("namn") as string,
+      email: formData.get("epost") as string,
+      date: formData.get("tid") as string,
+      message: formData.get("meddelande") as string,
+    };
+
+    const res = await fetch("/api/book", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    if (res.ok) {
+      window.location.href = "/tack";
+    } else {
+      setStatus("error");
+    }
+  }
+
   return (
     <Layout>
-      <main className="relative min-h-screen text-gray-900 overflow-hidden pt-24 pb-12 px-4 sm:px-6">
-        {/* Animated Wavy background image */}
-        <div className="absolute inset-0 -z-10 animate-fade-in-slow">
+      <main className="relative max-w-5xl mx-auto px-4 py-16 min-h-screen text-gray-900 overflow-hidden flex flex-col gap-16">
+        {/* Futuristic animated background */}
+        <div className="absolute inset-0 -z-20">
           <Image
             src="/images/background.png"
             alt="Bakgrund"
@@ -15,107 +46,124 @@ export default function Home() {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/70 to-blue-50/80" />
+          <div className="absolute inset-0 bg-gradient-to-br from-white/70 via-blue-100/70 to-blue-300/40 backdrop-blur-md" />
+          <div className="absolute left-2/3 top-1/3 w-80 h-80 -translate-x-1/2 rounded-full bg-gradient-to-tr from-blue-400/30 via-blue-300/10 to-transparent blur-3xl animate-pulse -z-10" />
         </div>
 
-        {/* Hero Section */}
-        <section className="max-w-2xl mx-auto text-center mb-14">
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-blue-900 drop-shadow-lg mb-4 animate-fade-in">
-            Välkommen till MTK
-          </h1>
-          <p className="text-lg sm:text-xl text-gray-800 mb-7 animate-fade-in delay-150">
-            Vi hjälper småföretag växa digitalt – kontakta oss för att komma igång med hemsida, bokningssystem, betalning och smart online-närvaro!
+        {/* Title and intro */}
+        <div className="text-center max-w-xl mx-auto z-10 animate-fade-in-up">
+          <h1 className="text-5xl font-extrabold text-blue-900 mb-5 tracking-tight drop-shadow-lg">Boka tid</h1>
+          <p className="text-lg text-gray-800 mb-6">
+            Välkommen! Boka ett kostnadsfritt möte där vi utforskar dina digitala möjligheter – snabbt, smidigt och framtidssäkert.
           </p>
-          <Link href="#kontakt" passHref>
-            <button className="bg-blue-600 text-white font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-blue-700 hover:scale-105 active:scale-95 transition-transform duration-300 animate-bounce-slow">
-              Kontakta oss
-            </button>
-          </Link>
-        </section>
+        </div>
 
-        {/* Features Section */}
-        <section className="max-w-5xl mx-auto grid md:grid-cols-3 gap-7 mb-20 px-2">
-          <div className="bg-white bg-opacity-90 rounded-xl shadow hover:shadow-xl p-6 text-center transition-all animate-pop-in">
-            <div className="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-              <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M7 16V4a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v12m0 0a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2zm2 2h4"/></svg>
+        {/* How it works section */}
+        <section className="flex flex-col md:flex-row justify-center gap-8 z-10 animate-fade-in delay-100">
+          <div className="flex-1 bg-white/70 backdrop-blur-lg rounded-xl shadow-lg p-6 flex flex-col items-center hover:scale-105 transition">
+            <div className="mb-3 bg-blue-600/90 rounded-full p-4 shadow-lg">
+              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1 4v1m0-1V8m0 8h.01"/></svg>
             </div>
-            <h3 className="text-xl font-semibold text-blue-800 mb-2">Responsiv Hemsida</h3>
-            <p className="text-gray-600">Mobilanpassad och professionell hemsida som fungerar på alla enheter.</p>
+            <h3 className="text-lg font-semibold text-blue-800 mb-1">Fyll i formuläret</h3>
+            <p className="text-center text-gray-700 text-sm">Berätta kort om vad du vill ha hjälp med och föreslå tid.</p>
           </div>
-          <div className="bg-white bg-opacity-90 rounded-xl shadow hover:shadow-xl p-6 text-center transition-all animate-pop-in delay-100">
-            <div className="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-              <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3h8v4m-8 0h8M5 21h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2z"/></svg>
+          <div className="flex-1 bg-white/70 backdrop-blur-lg rounded-xl shadow-lg p-6 flex flex-col items-center hover:scale-105 transition">
+            <div className="mb-3 bg-blue-800/90 rounded-full p-4 shadow-lg">
+              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path strokeLinecap="round" strokeLinejoin="round" d="M15 12h-3V8"/></svg>
             </div>
-            <h3 className="text-xl font-semibold text-blue-800 mb-2">Bokningssystem</h3>
-            <p className="text-gray-600">Smidig integration med bokningslösning, t.ex. Calendly eller Google Kalender.</p>
+            <h3 className="text-lg font-semibold text-blue-800 mb-1">Vi återkopplar snabbt</h3>
+            <p className="text-center text-gray-700 text-sm">Du får personlig bekräftelse och möteslänk inom 24 timmar.</p>
           </div>
-          <div className="bg-white bg-opacity-90 rounded-xl shadow hover:shadow-xl p-6 text-center transition-all animate-pop-in delay-200">
-            <div className="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-              <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.105 0-2 .672-2 1.5s.895 1.5 2 1.5c1.105 0 2 .672 2 1.5s-.895 1.5-2 1.5m0-7v2m0 12v-2m-6-4a6 6 0 1 1 12 0 6 6 0 0 1-12 0z"/></svg>
+          <div className="flex-1 bg-white/70 backdrop-blur-lg rounded-xl shadow-lg p-6 flex flex-col items-center hover:scale-105 transition">
+            <div className="mb-3 bg-blue-400/90 rounded-full p-4 shadow-lg">
+              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8 21h4m4 0h-4V5a4 4 0 0 1 4-4v0a4 4 0 0 1 4 4v16z"/></svg>
             </div>
-            <h3 className="text-xl font-semibold text-blue-800 mb-2">Betalningslösningar</h3>
-            <p className="text-gray-600">Ta emot betalningar via Swish, Klarna och andra moderna metoder.</p>
+            <h3 className="text-lg font-semibold text-blue-800 mb-1">Digitalt möte</h3>
+            <p className="text-center text-gray-700 text-sm">Vi ses online och kickstartar din digitala resa!</p>
           </div>
         </section>
 
-        {/* Kontakt Form Section */}
-        <section id="kontakt" className="max-w-xl mx-auto bg-white bg-opacity-90 p-8 rounded-lg shadow-2xl animate-fade-in-up">
-          <h2 className="text-2xl font-bold text-blue-900 mb-4 text-center">Kontakta oss</h2>
-          <p className="text-base text-gray-800 mb-7 text-center">
-            Fyll i formuläret eller mejla oss direkt – vi återkommer snabbt!
-          </p>
-<form
-  action="https://formsubmit.co/jirata52@gmail.com"
-  method="POST"
-  className="space-y-5"
->
-  {/* Hidden config */}
-  <input type="hidden" name="_next" value= "https://motijirata-hemsida-linux-f0fygjgvdafthsay.swedencentral-01.azurewebsites.net/tack"/>
-  <input type="hidden" name="_captcha" value="false" />
-  <input type="hidden" name="_template" value="table" />
-
-  {/* Name */}
-  <div>
-    <label className="block text-sm font-medium mb-1">Namn</label>
-    <input
-      type="text"
-      name="namn"
-      required
-      className="w-full border px-4 py-2 rounded focus:outline-none focus:border-blue-500 transition"
-    />
-  </div>
-
-  {/* Email */}
-  <div>
-    <label className="block text-sm font-medium mb-1">E-post</label>
-    <input
-      type="email"
-      name="epost"
-      required
-      className="w-full border px-4 py-2 rounded focus:outline-none focus:border-blue-500 transition"
-    />
-  </div>
-
-  {/* Message */}
-  <div>
-    <label className="block text-sm font-medium mb-1">Meddelande</label>
-    <textarea
-      name="meddelande"
-      rows={4}
-      required
-      className="w-full border px-4 py-2 rounded focus:outline-none focus:border-blue-500 transition"
-    />
-  </div>
-
-  {/* Submit */}
-  <button
-    type="submit"
-    className="bg-blue-600 text-white px-8 py-2 rounded font-semibold shadow hover:bg-blue-700 hover:scale-105 active:scale-95 transition duration-300 block mx-auto"
-  >
-    Skicka
-  </button>
-</form>
-
+        {/* Package cards + booking form */}
+        <section className="flex flex-col md:flex-row gap-10 items-start z-10">
+          {/* Packages/Meeting Types */}
+          <div className="flex-1 flex flex-col gap-5">
+            <div className="bg-gradient-to-br from-blue-100/60 via-white/80 to-blue-200/30 rounded-xl shadow-lg p-6 border border-blue-100">
+              <h4 className="text-xl text-blue-900 font-bold mb-2">Kostnadsfritt konsultationsmöte</h4>
+              <ul className="text-gray-700 text-sm pl-4 list-disc mb-2">
+                <li>30 minuter via Google Meet eller Teams</li>
+                <li>Behovsanalys & idéutbyte</li>
+                <li>Zero commitment</li>
+              </ul>
+            </div>
+            <div className="bg-gradient-to-br from-blue-100/60 via-white/80 to-blue-200/30 rounded-xl shadow-lg p-6 border border-blue-100">
+              <h4 className="text-xl text-blue-900 font-bold mb-2">Starta projekt direkt</h4>
+              <ul className="text-gray-700 text-sm pl-4 list-disc mb-2">
+                <li>Personligt offertmöte</li>
+                <li>Snabb leveransplan</li>
+                <li>Allt digitalt, inga dolda kostnader</li>
+              </ul>
+            </div>
+          </div>
+          {/* Booking Form */}
+          <div className="flex-1 min-w-[320px]">
+            <div className="bg-white/80 rounded-xl shadow-lg p-6 border border-blue-100">
+              <form
+                onSubmit={handleSubmit}
+                className="space-y-5"
+                autoComplete="off"
+              >
+                <div>
+                  <label className="block text-sm font-medium mb-1 text-blue-900">Namn</label>
+                  <input
+                    type="text"
+                    name="namn"
+                    required
+                    className="w-full border px-4 py-2 rounded focus:outline-none focus:border-blue-500 transition"
+                    autoComplete="name"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1 text-blue-900">E-post</label>
+                  <input
+                    type="email"
+                    name="epost"
+                    required
+                    className="w-full border px-4 py-2 rounded focus:outline-none focus:border-blue-500 transition"
+                    autoComplete="email"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1 text-blue-900">Föreslagen tid eller datum</label>
+                  <input
+                    type="text"
+                    name="tid"
+                    placeholder="T.ex. 25 juni kl 14:00"
+                    required
+                    className="w-full border px-4 py-2 rounded focus:outline-none focus:border-blue-500 transition"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1 text-blue-900">Meddelande</label>
+                  <textarea
+                    name="meddelande"
+                    rows={4}
+                    required
+                    className="w-full border px-4 py-2 rounded focus:outline-none focus:border-blue-500 transition"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="bg-blue-600 text-white px-8 py-3 rounded font-semibold shadow hover:bg-blue-700 hover:scale-105 active:scale-95 transition duration-300 block mx-auto"
+                  disabled={status === "loading"}
+                >
+                  Skicka bokningsförfrågan
+                </button>
+                {status === "error" && (
+                  <p className="text-red-600 text-center">Något gick fel. Försök igen.</p>
+                )}
+              </form>
+            </div>
+          </div>
         </section>
       </main>
     </Layout>

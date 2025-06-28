@@ -1,7 +1,40 @@
+"use client";
+
 import Layout from "@/components/Layout";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function BokaPage() {
+  const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setStatus("loading");
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+
+    const data = {
+      name: formData.get("namn") as string,
+      email: formData.get("epost") as string,
+      date: formData.get("tid") as string, 
+      message: formData.get("meddelande") as string,
+    };
+
+    const res = await fetch("/api/book", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    if (res.ok) {
+      window.location.href = "/tack";
+    } else {
+      setStatus("error");
+    }
+  }
+
   return (
     <Layout>
       <main className="relative max-w-5xl mx-auto px-4 py-16 min-h-screen text-gray-900 overflow-hidden flex flex-col gap-16">
@@ -51,87 +84,59 @@ export default function BokaPage() {
           </div>
         </section>
 
-        {/* Package cards + booking form */}
-        <section className="flex flex-col md:flex-row gap-10 items-start z-10">
-          {/* Packages/Meeting Types */}
-          <div className="flex-1 flex flex-col gap-5">
-            <div className="bg-gradient-to-br from-blue-100/60 via-white/80 to-blue-200/30 rounded-xl shadow-lg p-6 border border-blue-100">
-              <h4 className="text-xl text-blue-900 font-bold mb-2">Kostnadsfritt konsultationsmöte</h4>
-              <ul className="text-gray-700 text-sm pl-4 list-disc mb-2">
-                <li>30 minuter via Google Meet eller Teams</li>
-                <li>Behovsanalys & idéutbyte</li>
-                <li>Zero commitment</li>
-              </ul>
+        {/* Booking Form */}
+        <section className="flex-1 min-w-[320px] max-w-xl mx-auto bg-white/80 rounded-xl shadow-lg p-6 border border-blue-100">
+          <form onSubmit={handleSubmit} className="space-y-5" autoComplete="off">
+            <div>
+              <label className="block text-sm font-medium mb-1 text-blue-900">Namn</label>
+              <input
+                type="text"
+                name="namn"
+                required
+                className="w-full border px-4 py-2 rounded focus:outline-none focus:border-blue-500 transition"
+                autoComplete="name"
+              />
             </div>
-            <div className="bg-gradient-to-br from-blue-100/60 via-white/80 to-blue-200/30 rounded-xl shadow-lg p-6 border border-blue-100">
-              <h4 className="text-xl text-blue-900 font-bold mb-2">Starta projekt direkt</h4>
-              <ul className="text-gray-700 text-sm pl-4 list-disc mb-2">
-                <li>Personligt offertmöte</li>
-                <li>Snabb leveransplan</li>
-                <li>Allt digitalt, inga dolda kostnader</li>
-              </ul>
+            <div>
+              <label className="block text-sm font-medium mb-1 text-blue-900">E-post</label>
+              <input
+                type="email"
+                name="epost"
+                required
+                className="w-full border px-4 py-2 rounded focus:outline-none focus:border-blue-500 transition"
+                autoComplete="email"
+              />
             </div>
-          </div>
-          {/* Custom Booking Form */}
-          <div className="flex-1 min-w-[320px]">
-            <div className="bg-white/80 rounded-xl shadow-lg p-6 border border-blue-100">
-              <form
-                action="https://formsubmit.co/jirata52@gmail.com" 
-                method="POST"
-                className="space-y-5"
-                autoComplete="off"
-              >
-                  {/* Hidden config */}
-  <input type="hidden" name="_next" value= "https://motijirata-hemsida-linux-f0fygjgvdafthsay.swedencentral-01.azurewebsites.net/tack"/>
-  <input type="hidden" name="_captcha" value="false" />
-  <input type="hidden" name="_template" value="table" />
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-blue-900">Namn</label>
-                  <input
-                    type="text"
-                    name="namn"
-                    required
-                    className="w-full border px-4 py-2 rounded focus:outline-none focus:border-blue-500 transition"
-                    autoComplete="name"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-blue-900">E-post</label>
-                  <input
-                    type="email"
-                    name="epost"
-                    required
-                    className="w-full border px-4 py-2 rounded focus:outline-none focus:border-blue-500 transition"
-                    autoComplete="email"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-blue-900">Föreslagen tid eller datum</label>
-                  <input
-                    type="text"
-                    name="tid"
-                    placeholder="T.ex. 25 juni kl 14:00"
-                    className="w-full border px-4 py-2 rounded focus:outline-none focus:border-blue-500 transition"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-blue-900">Meddelande</label>
-                  <textarea
-                    name="meddelande"
-                    rows={4}
-                    required
-                    className="w-full border px-4 py-2 rounded focus:outline-none focus:border-blue-500 transition"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="bg-blue-600 text-white px-8 py-3 rounded font-semibold shadow hover:bg-blue-700 hover:scale-105 active:scale-95 transition duration-300 block mx-auto"
-                >
-                  Skicka bokningsförfrågan
-                </button>
-              </form>
+            <div>
+              <label className="block text-sm font-medium mb-1 text-blue-900">Föreslagen tid eller datum</label>
+              <input
+                type="text"
+                name="tid"
+                placeholder="T.ex. 25 juni kl 14:00"
+                required
+                className="w-full border px-4 py-2 rounded focus:outline-none focus:border-blue-500 transition"
+              />
             </div>
-          </div>
+            <div>
+              <label className="block text-sm font-medium mb-1 text-blue-900">Meddelande</label>
+              <textarea
+                name="meddelande"
+                rows={4}
+                required
+                className="w-full border px-4 py-2 rounded focus:outline-none focus:border-blue-500 transition"
+              />
+            </div>
+            <button
+              type="submit"
+              className="bg-blue-600 text-white px-8 py-3 rounded font-semibold shadow hover:bg-blue-700 hover:scale-105 active:scale-95 transition duration-300 block mx-auto"
+              disabled={status === "loading"}
+            >
+              Skicka bokningsförfrågan
+            </button>
+            {status === "error" && (
+              <p className="text-red-600 text-center">Något gick fel. Försök igen.</p>
+            )}
+          </form>
         </section>
       </main>
     </Layout>
