@@ -1,7 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Layout from "@/components/Layout";
 import Image from "next/image";
+import Link from "next/link";
 
 // Placeholder SVGs 
 const services = [
@@ -37,14 +38,23 @@ const services = [
 export default function TjansterPage() {
   const [modalIndex, setModalIndex] = useState<number | null>(null);
 
+  // Open modal with the index of the service
   const openModal = (idx: number) => setModalIndex(idx);
+
+  // Close modal
   const closeModal = () => setModalIndex(null);
 
-  if (typeof window !== "undefined" && modalIndex !== null) {
-    window.onkeydown = (e) => {
-      if (e.key === "Escape") closeModal();
-    };
-  }
+  // Handle Escape key to close modal
+  // Note: useEffect is the best practice for adding/removing event listeners
+  useEffect(() => {
+    if (modalIndex !== null) {
+      const handleEsc = (e: KeyboardEvent) => {
+        if (e.key === "Escape") closeModal();
+      };
+      window.addEventListener("keydown", handleEsc);
+      return () => window.removeEventListener("keydown", handleEsc);
+    }
+  }, [modalIndex]);
 
   return (
     <Layout>
@@ -73,6 +83,7 @@ export default function TjansterPage() {
                 <button
                   className="mt-2 px-4 py-2 bg-blue-600 text-white rounded shadow hover:bg-blue-700 transition"
                   onClick={() => openModal(i)}
+                  type="button"
                 >
                   Visa demo
                 </button>
@@ -95,6 +106,7 @@ export default function TjansterPage() {
                 className="absolute top-3 right-3 text-blue-800 bg-blue-100/60 rounded-full p-2 hover:bg-blue-200 transition"
                 onClick={closeModal}
                 aria-label="Stäng demo"
+                type="button"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"/>
@@ -113,6 +125,13 @@ export default function TjansterPage() {
                 <div className="mt-6 text-center text-blue-800 font-semibold text-lg">
                   Demo på väg – kontakta oss för en personlig genomgång!
                 </div>
+                <Link
+                  href="/kontakt"
+                  className="mt-4 inline-block bg-blue-600 text-white font-semibold px-6 py-3 rounded-full shadow hover:bg-blue-700 hover:scale-105 active:scale-95 transition"
+                  onClick={closeModal}
+                >
+                  Kontakta oss
+                </Link>
               </div>
             </div>
           </div>

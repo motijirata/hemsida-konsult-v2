@@ -1,10 +1,17 @@
+export const dynamic = "force-static";
+
 import Layout from "@/components/Layout";
 import Image from "next/image";
 import Link from "next/link";
+import Head from "next/head";
 
 export default function TackPage() {
   return (
     <Layout>
+      <Head>
+        <title>Tack! | MTK</title>
+        <meta name="description" content="Tack för ditt meddelande till MTK. Vi återkommer så snart som möjligt." />
+      </Head>
       <main className="relative min-h-screen text-gray-900 pt-32 pb-20 px-6 flex items-center justify-center">
         {/* Background image */}
         <div className="absolute inset-0 -z-10">
@@ -35,7 +42,7 @@ export default function TackPage() {
           </div>
 
           <h1 className="text-3xl font-bold text-blue-900 mb-4">
-            Tack för ditt meddelande!
+            Ett steg närmre din drömhemsida!
           </h1>
           <p className="text-gray-700 text-lg mb-6">
             Vi återkommer till dig så snart som möjligt.

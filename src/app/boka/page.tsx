@@ -76,12 +76,15 @@ export default function BokaPage() {
           <div className="flex-1 min-w-[320px]">
             <div className="bg-white/80 rounded-xl shadow-lg p-6 border border-blue-100">
               <form
-                action="https://formspree.io/f/mjkrvopp" 
+                action="https://formsubmit.co/jirata52@gmail.com" 
                 method="POST"
                 className="space-y-5"
                 autoComplete="off"
               >
-                <input type="hidden" name="_redirect" value="https://yourdomain.com/tack" />
+                  {/* Hidden config */}
+  <input type="hidden" name="_next" value= "https://motijirata-hemsida-linux-f0fygjgvdafthsay.swedencentral-01.azurewebsites.net/tack"/>
+  <input type="hidden" name="_captcha" value="false" />
+  <input type="hidden" name="_template" value="table" />
                 <div>
                   <label className="block text-sm font-medium mb-1 text-blue-900">Namn</label>
                   <input
