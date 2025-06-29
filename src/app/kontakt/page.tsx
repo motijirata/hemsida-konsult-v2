@@ -1,11 +1,11 @@
 "use client";
 
 import Layout from "@/components/Layout";
-import Image from "next/image";
 import { useState } from "react";
+import Image from "next/image";
 
-export default function BokaPage() {
-  const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
+export default function KontaktPage() {
+  const [status, setStatus] = useState<"idle" | "loading" | "error" | "success">("idle");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -17,18 +17,18 @@ export default function BokaPage() {
     const data = {
       name: formData.get("namn") as string,
       email: formData.get("epost") as string,
-      date: formData.get("tid") as string,
       message: formData.get("meddelande") as string,
     };
 
-    const res = await fetch("/api/book", {
+    const res = await fetch("/api/contact", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
 
     if (res.ok) {
-      window.location.href = "/tack";
+      setStatus("success");
+      form.reset();
     } else {
       setStatus("error");
     }
@@ -52,59 +52,47 @@ export default function BokaPage() {
 
         {/* Title and intro */}
         <div className="text-center max-w-xl mx-auto z-10 animate-fade-in-up">
-          <h1 className="text-5xl font-extrabold text-blue-900 mb-5 tracking-tight drop-shadow-lg">Boka tid</h1>
+          <h1 className="text-5xl font-extrabold text-blue-900 mb-5 tracking-tight drop-shadow-lg">Kontakta oss</h1>
           <p className="text-lg text-gray-800 mb-6">
-            Välkommen! Boka ett kostnadsfritt möte där vi utforskar dina digitala möjligheter – snabbt, smidigt och framtidssäkert.
+            Vi hjälper dig gärna – oavsett om du har frågor, behöver rådgivning, vill starta ett projekt eller bara är nyfiken på digital utveckling. Fyll i formuläret eller använd våra kontaktuppgifter nedan!
           </p>
         </div>
 
-        {/* How it works section */}
-        <section className="flex flex-col md:flex-row justify-center gap-8 z-10 animate-fade-in delay-100">
-          <div className="flex-1 bg-white/70 backdrop-blur-lg rounded-xl shadow-lg p-6 flex flex-col items-center hover:scale-105 transition">
-            <div className="mb-3 bg-blue-600/90 rounded-full p-4 shadow-lg">
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1 4v1m0-1V8m0 8h.01"/></svg>
+        {/* Info + Contact Details + Why choose us */}
+        <section className="flex flex-col md:flex-row gap-10 z-10 animate-fade-in delay-100">
+          {/* Useful info for customers */}
+          <div className="flex-1 flex flex-col gap-6">
+            <div className="bg-white/70 backdrop-blur-lg rounded-xl shadow-lg p-6 border border-blue-100 flex flex-col gap-2">
+              <h3 className="text-xl font-bold text-blue-900 mb-1">Så kan vi hjälpa dig</h3>
+              <ul className="list-disc list-inside text-gray-800 text-sm space-y-1">
+                <li>Kostnadsfri konsultation – vi svarar snabbt på alla förfrågningar.</li>
+                <li>Personligt bemötande och anpassade lösningar för ditt företag.</li>
+                <li>Support och rådgivning även efter avslutat projekt.</li>
+                <li>Transparenta priser – inga dolda avgifter.</li>
+              </ul>
             </div>
-            <h3 className="text-lg font-semibold text-blue-800 mb-1">Fyll i formuläret</h3>
-            <p className="text-center text-gray-700 text-sm">Berätta kort om vad du vill ha hjälp med och föreslå tid.</p>
-          </div>
-          <div className="flex-1 bg-white/70 backdrop-blur-lg rounded-xl shadow-lg p-6 flex flex-col items-center hover:scale-105 transition">
-            <div className="mb-3 bg-blue-800/90 rounded-full p-4 shadow-lg">
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path strokeLinecap="round" strokeLinejoin="round" d="M15 12h-3V8"/></svg>
+            <div className="bg-white/70 backdrop-blur-lg rounded-xl shadow-lg p-6 border border-blue-100 flex flex-col gap-2">
+              <h3 className="text-lg font-semibold text-blue-900 mb-1">Kontaktuppgifter</h3>
+              <p className="text-gray-800 text-sm">
+                <strong>E-post:</strong> <a href="mailto:info@example.com" className="text-blue-700 underline">info@example.com</a><br />
+                <strong>Telefon:</strong> <a href="tel:+46701234567" className="text-blue-700 underline">070-123 45 67</a><br />
+                <strong>Adress:</strong> Exempelgatan 1, 123 45 Stockholm
+              </p>
+              <p className="text-gray-700 text-xs mt-2">
+                Vi är tillgängliga vardagar 08:00–17:00 och svarar vanligtvis inom 24 timmar.
+              </p>
             </div>
-            <h3 className="text-lg font-semibold text-blue-800 mb-1">Vi återkopplar snabbt</h3>
-            <p className="text-center text-gray-700 text-sm">Du får personlig bekräftelse och möteslänk inom 24 timmar.</p>
-          </div>
-          <div className="flex-1 bg-white/70 backdrop-blur-lg rounded-xl shadow-lg p-6 flex flex-col items-center hover:scale-105 transition">
-            <div className="mb-3 bg-blue-400/90 rounded-full p-4 shadow-lg">
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8 21h4m4 0h-4V5a4 4 0 0 1 4-4v0a4 4 0 0 1 4 4v16z"/></svg>
+            <div className="bg-white/70 backdrop-blur-lg rounded-xl shadow-lg p-6 border border-blue-100 flex flex-col gap-2">
+              <h3 className="text-lg font-semibold text-blue-900 mb-1">Varför välja oss?</h3>
+              <ul className="list-disc list-inside text-gray-800 text-sm space-y-1">
+                <li>Certifierade experter inom webbutveckling och digital strategi</li>
+                <li>Fokus på långsiktiga relationer och mätbara resultat</li>
+                <li>Modern, användarvänlig design och teknik</li>
+              </ul>
             </div>
-            <h3 className="text-lg font-semibold text-blue-800 mb-1">Digitalt möte</h3>
-            <p className="text-center text-gray-700 text-sm">Vi ses online och kickstartar din digitala resa!</p>
           </div>
-        </section>
 
-        {/* Package cards + booking form */}
-        <section className="flex flex-col md:flex-row gap-10 items-start z-10">
-          {/* Packages/Meeting Types */}
-          <div className="flex-1 flex flex-col gap-5">
-            <div className="bg-gradient-to-br from-blue-100/60 via-white/80 to-blue-200/30 rounded-xl shadow-lg p-6 border border-blue-100">
-              <h4 className="text-xl text-blue-900 font-bold mb-2">Kostnadsfritt konsultationsmöte</h4>
-              <ul className="text-gray-700 text-sm pl-4 list-disc mb-2">
-                <li>30 minuter via Google Meet eller Teams</li>
-                <li>Behovsanalys & idéutbyte</li>
-                <li>Zero commitment</li>
-              </ul>
-            </div>
-            <div className="bg-gradient-to-br from-blue-100/60 via-white/80 to-blue-200/30 rounded-xl shadow-lg p-6 border border-blue-100">
-              <h4 className="text-xl text-blue-900 font-bold mb-2">Starta projekt direkt</h4>
-              <ul className="text-gray-700 text-sm pl-4 list-disc mb-2">
-                <li>Personligt offertmöte</li>
-                <li>Snabb leveransplan</li>
-                <li>Allt digitalt, inga dolda kostnader</li>
-              </ul>
-            </div>
-          </div>
-          {/* Booking Form */}
+          {/* Contact form */}
           <div className="flex-1 min-w-[320px]">
             <div className="bg-white/80 rounded-xl shadow-lg p-6 border border-blue-100">
               <form
@@ -133,16 +121,6 @@ export default function BokaPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1 text-blue-900">Föreslagen tid eller datum</label>
-                  <input
-                    type="text"
-                    name="tid"
-                    placeholder="T.ex. 25 juni kl 14:00"
-                    required
-                    className="w-full border px-4 py-2 rounded focus:outline-none focus:border-blue-500 transition"
-                  />
-                </div>
-                <div>
                   <label className="block text-sm font-medium mb-1 text-blue-900">Meddelande</label>
                   <textarea
                     name="meddelande"
@@ -156,10 +134,13 @@ export default function BokaPage() {
                   className="bg-blue-600 text-white px-8 py-3 rounded font-semibold shadow hover:bg-blue-700 hover:scale-105 active:scale-95 transition duration-300 block mx-auto"
                   disabled={status === "loading"}
                 >
-                  Skicka bokningsförfrågan
+                  Skicka meddelande
                 </button>
                 {status === "error" && (
                   <p className="text-red-600 text-center">Något gick fel. Försök igen.</p>
+                )}
+                {status === "success" && (
+                  <p className="text-green-600 text-center">Tack för ditt meddelande! Vi återkommer snart.</p>
                 )}
               </form>
             </div>
