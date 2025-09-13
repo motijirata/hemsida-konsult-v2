@@ -3,6 +3,7 @@
 import Layout from "@/components/Layout";
 import { useState } from "react";
 import Image from "next/image";
+import { HiOutlineEnvelope, HiOutlineUser, HiOutlineChatBubbleLeftRight } from "react-icons/hi2";
 
 export default function KontaktPage() {
   const [status, setStatus] = useState<"idle" | "loading" | "error" | "success">("idle");
@@ -61,7 +62,7 @@ export default function KontaktPage() {
         {/* Info + Contact Details + Why choose us */}
         <section className="flex flex-col md:flex-row gap-10 z-10 animate-fade-in delay-100">
           {/* Useful info for customers */}
-          <div className="flex-1 flex flex-col gap-6">
+          <div className="flex-1 flex flex-col gap-6 min-w-[320px]">
             <div className="bg-white/70 backdrop-blur-lg rounded-xl shadow-lg p-6 border border-blue-100 flex flex-col gap-2">
               <h3 className="text-xl font-bold text-blue-900 mb-1">Så kan vi hjälpa dig</h3>
               <ul className="list-disc list-inside text-gray-800 text-sm space-y-1">
@@ -92,55 +93,68 @@ export default function KontaktPage() {
             </div>
           </div>
 
-          {/* Contact form */}
-          <div className="flex-1 min-w-[320px]">
-            <div className="bg-white/80 rounded-xl shadow-lg p-6 border border-blue-100">
+          {/* Modern, wide and attractive contact form */}
+          <div className="flex-1 flex flex-col justify-center">
+            <div className="bg-white rounded-2xl shadow-2xl border border-blue-100 p-0">
               <form
                 onSubmit={handleSubmit}
-                className="space-y-5"
+                className="flex flex-col gap-6 p-8 md:p-10"
                 autoComplete="off"
               >
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-blue-900">Namn</label>
+                <h2 className="text-2xl font-bold text-blue-900 mb-2 text-center">Skicka ett meddelande</h2>
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="namn" className="font-semibold text-blue-800 flex items-center gap-2">
+                    <HiOutlineUser className="text-blue-400 text-xl" /> Namn
+                  </label>
                   <input
                     type="text"
                     name="namn"
+                    id="namn"
                     required
-                    className="w-full border px-4 py-2 rounded focus:outline-none focus:border-blue-500 transition"
+                    className="w-full px-4 py-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none transition text-base bg-blue-50"
                     autoComplete="name"
+                    placeholder="Ditt namn"
                   />
                 </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-blue-900">E-post</label>
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="epost" className="font-semibold text-blue-800 flex items-center gap-2">
+                    <HiOutlineEnvelope className="text-blue-400 text-xl" /> E-post
+                  </label>
                   <input
                     type="email"
                     name="epost"
+                    id="epost"
                     required
-                    className="w-full border px-4 py-2 rounded focus:outline-none focus:border-blue-500 transition"
+                    className="w-full px-4 py-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none transition text-base bg-blue-50"
                     autoComplete="email"
+                    placeholder="din@email.se"
                   />
                 </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-blue-900">Meddelande</label>
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="meddelande" className="font-semibold text-blue-800 flex items-center gap-2">
+                    <HiOutlineChatBubbleLeftRight className="text-blue-400 text-xl" /> Meddelande
+                  </label>
                   <textarea
                     name="meddelande"
-                    rows={4}
+                    id="meddelande"
+                    rows={5}
                     required
-                    className="w-full border px-4 py-2 rounded focus:outline-none focus:border-blue-500 transition"
+                    className="w-full px-4 py-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none transition text-base bg-blue-50 resize-none"
+                    placeholder="Vad kan vi hjälpa till med?"
                   />
                 </div>
                 <button
                   type="submit"
-                  className="bg-blue-600 text-white px-8 py-3 rounded font-semibold shadow hover:bg-blue-700 hover:scale-105 active:scale-95 transition duration-300 block mx-auto"
+                  className="mt-2 bg-blue-600 text-white font-semibold py-3 rounded-lg shadow-lg hover:bg-blue-800 hover:scale-105 active:scale-95 transition text-lg"
                   disabled={status === "loading"}
                 >
-                  Skicka meddelande
+                  {status === "loading" ? "Skickar..." : "Skicka meddelande"}
                 </button>
                 {status === "error" && (
-                  <p className="text-red-600 text-center">Något gick fel. Försök igen.</p>
+                  <p className="text-red-600 text-center mt-2">Något gick fel. Försök igen.</p>
                 )}
                 {status === "success" && (
-                  <p className="text-green-600 text-center">Tack för ditt meddelande! Vi återkommer snart.</p>
+                  <p className="text-green-600 text-center mt-2">Tack för ditt meddelande! Vi återkommer snart.</p>
                 )}
               </form>
             </div>

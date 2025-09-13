@@ -24,7 +24,7 @@ export default function OmOssPage() {
           Om oss
         </h1>
         <p className="text-lg sm:text-xl text-gray-800 mb-14 max-w-2xl mx-auto text-center animate-fade-in delay-100">
-          <span className="font-semibold text-blue-700">MTK</span> hjälper småföretag att komma online med snygga, smarta och framtidssäkra hemsidor, bokningssystem och betalningar. Ditt digitala lyft börjar här.
+          <span className="font-semibold text-blue-700">KTMO</span> hjälper småföretag att komma online med snygga, smarta och framtidssäkra hemsidor, bokningssystem och betalningar. Ditt digitala lyft börjar här.
         </p>
 
         {/* Info Cards */}

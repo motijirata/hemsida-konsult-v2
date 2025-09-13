@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MTK-soultions",
+  title: "KTMO-soultions",
   description: "Vi löser",
 };
 

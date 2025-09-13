@@ -3,6 +3,7 @@
 import Layout from "@/components/Layout";
 import Image from "next/image";
 import { useState } from "react";
+import { HiOutlineCalendar, HiOutlineUser, HiOutlineEnvelope, HiOutlineChatBubbleLeftRight } from "react-icons/hi2";
 
 export default function BokaPage() {
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
@@ -14,11 +15,10 @@ export default function BokaPage() {
     const form = e.currentTarget;
     const formData = new FormData(form);
 
-
     const data = {
       name: formData.get("namn") as string,
       email: formData.get("epost") as string,
-      date: formData.get("tid") as string, 
+      date: formData.get("tid") as string,
       message: formData.get("meddelande") as string,
     };
 
@@ -61,82 +61,104 @@ export default function BokaPage() {
 
         {/* How it works section */}
         <section className="flex flex-col md:flex-row justify-center gap-8 z-10 animate-fade-in delay-100">
-          <div className="flex-1 bg-white/70 backdrop-blur-lg rounded-xl shadow-lg p-6 flex flex-col items-center hover:scale-105 transition">
+          <div className="flex-1 bg-white/80 backdrop-blur-lg rounded-xl shadow-lg p-6 flex flex-col items-center hover:scale-105 transition">
             <div className="mb-3 bg-blue-600/90 rounded-full p-4 shadow-lg">
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1 4v1m0-1V8m0 8h.01"/></svg>
+              <HiOutlineUser className="w-8 h-8 text-white" />
             </div>
             <h3 className="text-lg font-semibold text-blue-800 mb-1">Fyll i formuläret</h3>
             <p className="text-center text-gray-700 text-sm">Berätta kort om vad du vill ha hjälp med och föreslå tid.</p>
           </div>
-          <div className="flex-1 bg-white/70 backdrop-blur-lg rounded-xl shadow-lg p-6 flex flex-col items-center hover:scale-105 transition">
+          <div className="flex-1 bg-white/80 backdrop-blur-lg rounded-xl shadow-lg p-6 flex flex-col items-center hover:scale-105 transition">
             <div className="mb-3 bg-blue-800/90 rounded-full p-4 shadow-lg">
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path strokeLinecap="round" strokeLinejoin="round" d="M15 12h-3V8"/></svg>
+              <HiOutlineCalendar className="w-8 h-8 text-white" />
             </div>
             <h3 className="text-lg font-semibold text-blue-800 mb-1">Vi återkopplar snabbt</h3>
             <p className="text-center text-gray-700 text-sm">Du får personlig bekräftelse och möteslänk inom 24 timmar.</p>
           </div>
-          <div className="flex-1 bg-white/70 backdrop-blur-lg rounded-xl shadow-lg p-6 flex flex-col items-center hover:scale-105 transition">
+          <div className="flex-1 bg-white/80 backdrop-blur-lg rounded-xl shadow-lg p-6 flex flex-col items-center hover:scale-105 transition">
             <div className="mb-3 bg-blue-400/90 rounded-full p-4 shadow-lg">
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8 21h4m4 0h-4V5a4 4 0 0 1 4-4v0a4 4 0 0 1 4 4v16z"/></svg>
+              <HiOutlineChatBubbleLeftRight className="w-8 h-8 text-white" />
             </div>
             <h3 className="text-lg font-semibold text-blue-800 mb-1">Digitalt möte</h3>
             <p className="text-center text-gray-700 text-sm">Vi ses online och kickstartar din digitala resa!</p>
           </div>
         </section>
 
-        {/* Booking Form */}
-        <section className="flex-1 min-w-[320px] max-w-xl mx-auto bg-white/80 rounded-xl shadow-lg p-6 border border-blue-100">
-          <form onSubmit={handleSubmit} className="space-y-5" autoComplete="off">
-            <div>
-              <label className="block text-sm font-medium mb-1 text-blue-900">Namn</label>
-              <input
-                type="text"
-                name="namn"
-                required
-                className="w-full border px-4 py-2 rounded focus:outline-none focus:border-blue-500 transition"
-                autoComplete="name"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1 text-blue-900">E-post</label>
-              <input
-                type="email"
-                name="epost"
-                required
-                className="w-full border px-4 py-2 rounded focus:outline-none focus:border-blue-500 transition"
-                autoComplete="email"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1 text-blue-900">Föreslagen tid eller datum</label>
-              <input
-                type="text"
-                name="tid"
-                placeholder="T.ex. 25 juni kl 14:00"
-                required
-                className="w-full border px-4 py-2 rounded focus:outline-none focus:border-blue-500 transition"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1 text-blue-900">Meddelande</label>
-              <textarea
-                name="meddelande"
-                rows={4}
-                required
-                className="w-full border px-4 py-2 rounded focus:outline-none focus:border-blue-500 transition"
-              />
-            </div>
-            <button
-              type="submit"
-              className="bg-blue-600 text-white px-8 py-3 rounded font-semibold shadow hover:bg-blue-700 hover:scale-105 active:scale-95 transition duration-300 block mx-auto"
-              disabled={status === "loading"}
+        {/* Modern, wide and attractive booking form */}
+        <section className="flex justify-center z-10">
+          <div className="w-full max-w-xl bg-white rounded-2xl shadow-2xl border border-blue-100 p-0">
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col gap-6 p-8 md:p-10"
+              autoComplete="off"
             >
-              Skicka bokningsförfrågan
-            </button>
-            {status === "error" && (
-              <p className="text-red-600 text-center">Något gick fel. Försök igen.</p>
-            )}
-          </form>
+              <h2 className="text-2xl font-bold text-blue-900 mb-2 text-center">Boka ett möte</h2>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="namn" className="font-semibold text-blue-800 flex items-center gap-2">
+                  <HiOutlineUser className="text-blue-400 text-xl" /> Namn
+                </label>
+                <input
+                  type="text"
+                  name="namn"
+                  id="namn"
+                  required
+                  className="w-full px-4 py-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none transition text-base bg-blue-50"
+                  autoComplete="name"
+                  placeholder="Ditt namn"
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="epost" className="font-semibold text-blue-800 flex items-center gap-2">
+                  <HiOutlineEnvelope className="text-blue-400 text-xl" /> E-post
+                </label>
+                <input
+                  type="email"
+                  name="epost"
+                  id="epost"
+                  required
+                  className="w-full px-4 py-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none transition text-base bg-blue-50"
+                  autoComplete="email"
+                  placeholder="din@email.se"
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="tid" className="font-semibold text-blue-800 flex items-center gap-2">
+                  <HiOutlineCalendar className="text-blue-400 text-xl" /> Föreslagen tid eller datum
+                </label>
+                <input
+                  type="text"
+                  name="tid"
+                  id="tid"
+                  placeholder="T.ex. 25 juni kl 14:00"
+                  required
+                  className="w-full px-4 py-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none transition text-base bg-blue-50"
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="meddelande" className="font-semibold text-blue-800 flex items-center gap-2">
+                  <HiOutlineChatBubbleLeftRight className="text-blue-400 text-xl" /> Meddelande
+                </label>
+                <textarea
+                  name="meddelande"
+                  id="meddelande"
+                  rows={5}
+                  required
+                  className="w-full px-4 py-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none transition text-base bg-blue-50 resize-none"
+                  placeholder="Vad vill du prata om?"
+                />
+              </div>
+              <button
+                type="submit"
+                className="mt-2 bg-blue-600 text-white font-semibold py-3 rounded-lg shadow-lg hover:bg-blue-800 hover:scale-105 active:scale-95 transition text-lg"
+                disabled={status === "loading"}
+              >
+                {status === "loading" ? "Skickar..." : "Skicka bokningsförfrågan"}
+              </button>
+              {status === "error" && (
+                <p className="text-red-600 text-center mt-2">Något gick fel. Försök igen.</p>
+              )}
+            </form>
+          </div>
         </section>
       </main>
     </Layout>
