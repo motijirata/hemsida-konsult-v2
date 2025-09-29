@@ -75,9 +75,9 @@ export default function KontaktPage() {
             <div className="bg-white/70 backdrop-blur-lg rounded-xl shadow-lg p-6 border border-blue-100 flex flex-col gap-2">
               <h3 className="text-lg font-semibold text-blue-900 mb-1">Kontaktuppgifter</h3>
               <p className="text-gray-800 text-sm">
-                <strong>E-post:</strong> <a href="mailto:info@example.com" className="text-blue-700 underline">info@example.com</a><br />
-                <strong>Telefon:</strong> <a href="tel:+46701234567" className="text-blue-700 underline">070-123 45 67</a><br />
-                <strong>Adress:</strong> Exempelgatan 1, 123 45 Stockholm
+                <strong>E-post:</strong> <a href="mailto:ktmoab@gmail.com" className="text-blue-700 underline">ktmoab@gmail.com</a><br />
+                <strong>Telefon:</strong> <a href="tel:+46762109244" className="text-blue-700 underline">0762109244</a><br />
+                
               </p>
               <p className="text-gray-700 text-xs mt-2">
                 Vi är tillgängliga vardagar 08:00–17:00 och svarar vanligtvis inom 24 timmar.
@@ -88,7 +88,7 @@ export default function KontaktPage() {
               <ul className="list-disc list-inside text-gray-800 text-sm space-y-1">
                 <li>Certifierade experter inom webbutveckling och digital strategi</li>
                 <li>Fokus på långsiktiga relationer och mätbara resultat</li>
-                <li>Modern, användarvänlig design och teknik</li>
+                <li>Modern användarvänlig design och teknik</li>
               </ul>
             </div>
           </div>

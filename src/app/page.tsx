@@ -34,10 +34,10 @@ export default function Home() {
           {/* Hero Content */}
           <div className="relative z-10 px-4 w-full max-w-3xl pt-32 sm:pt-40 md:pt-0 mt-0 md:mt-8">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-blue-900 mb-4 leading-tight drop-shadow animate-fade-in">
-              Hjälper småföretag växa digitalt
+              Vi Hjälper småföretag växa digitalt
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-gray-700 mb-8 leading-relaxed animate-fade-in delay-200">
-              Vi skapar hemsidor, bokningssystem och betalningslösningar – allt du behöver för att komma igång online.
+              Vi skapar hemsidor, Smidig integration med smarta bokningssystem för  bokning online och betalningslösningar – allt du behöver för att komma igång online.
             </p>
             <Link href="/boka" passHref>
               <button className="inline-block bg-blue-600 text-white text-base sm:text-lg font-semibold px-6 sm:px-8 py-2.5 sm:py-3 rounded-full shadow hover:bg-blue-700 hover:scale-105 active:scale-95 transition duration-300 animate-bounce-slow">
@@ -120,15 +120,15 @@ export default function Home() {
             <h2 className="text-xl md:text-2xl font-bold text-blue-900 mb-4">Vad kostar det?</h2>
             <p className="text-gray-700 text-lg mb-6">
               Priser från <span className="font-semibold text-blue-600">4&nbsp;990 kr</span> i engångskostnad<br />
-              + <span className="font-semibold text-blue-600">199 kr/mån</span> för drift, support och hosting.<br />
+              + <span className="font-semibold text-blue-600">99 kr/mån</span> för drift, support och hosting.<br />
               Vi erbjuder fasta paket och skräddarsydda lösningar – kontakta oss för en kostnadsfri offert!
             </p>
             <div className="bg-blue-50 rounded-xl p-6 text-left mt-8 shadow max-w-2xl mx-auto">
               <h3 className="font-semibold text-blue-800 mb-2 text-lg">Varför välja oss istället för Starto eller WordPress?</h3>
               <ul className="list-disc list-inside text-gray-700 space-y-2 text-base">
                 <li><b>Skräddarsydd och personlig service</b> – Vi bygger hemsidan åt dig, du slipper göra det själv.</li>
-                <li><b>Ingen stress, inget strul</b> – Du får hjälp av en riktig person, inte support-forum eller bot.</li>
-                <li><b>Design och funktionalitet anpassad till ditt företag</b>, inte generiska mallar.</li>
+                <li><b>Ingen stress, inget strul</b> – Du får hjälp av en riktig person- inte supportforum eller en bot.</li>
+                <li><b>Design och funktionalitet anpassad till ditt företag</b>, inga generiska mallar.</li>
                 <li><b>Smidig integration</b> för bokning, betalning och andra affärsbehov.</li>
                 <li>Du sparar tid så du kan fokusera på din verksamhet.</li>
                 <li>Vi tar ansvar för drift, säkerhet och support – du slipper tänka på teknik!</li>
@@ -143,10 +143,10 @@ export default function Home() {
         {/* CTA Section */}
         <section className="py-16 bg-gradient-to-br from-blue-100 via-white to-blue-50 flex flex-col items-center text-center">
           <h2 className="text-2xl sm:text-3xl font-bold text-blue-900 mb-4 animate-fade-in">
-            Redo att ta nästa steg?
+            Redo för nästa steg?
           </h2>
           <p className="text-base sm:text-lg text-gray-700 mb-8 animate-fade-in delay-100">
-            Kontakta oss för att diskutera ert projekt och hur vi kan hjälpa er att växa digitalt!
+            Kontakta oss för att konsultera om hur vi kan stötta er digitala tillväxt!
           </p>
           <Link href="/boka" passHref>
             <button className="bg-blue-600 text-white text-lg font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-blue-700 hover:scale-105 active:scale-95 transition duration-300 animate-bounce-slow">

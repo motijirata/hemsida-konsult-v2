@@ -66,14 +66,14 @@ export default function BokaPage() {
               <HiOutlineUser className="w-8 h-8 text-white" />
             </div>
             <h3 className="text-lg font-semibold text-blue-800 mb-1">Fyll i formuläret</h3>
-            <p className="text-center text-gray-700 text-sm">Berätta kort om vad du vill ha hjälp med och föreslå tid.</p>
+            <p className="text-center text-gray-700 text-sm">Berätta kort om vad du vill ha hjälp med och föreslå en tid.</p>
           </div>
           <div className="flex-1 bg-white/80 backdrop-blur-lg rounded-xl shadow-lg p-6 flex flex-col items-center hover:scale-105 transition">
             <div className="mb-3 bg-blue-800/90 rounded-full p-4 shadow-lg">
               <HiOutlineCalendar className="w-8 h-8 text-white" />
             </div>
             <h3 className="text-lg font-semibold text-blue-800 mb-1">Vi återkopplar snabbt</h3>
-            <p className="text-center text-gray-700 text-sm">Du får personlig bekräftelse och möteslänk inom 24 timmar.</p>
+            <p className="text-center text-gray-700 text-sm">Du får en personlig bekräftelse och möteslänk inom 24 timmar.</p>
           </div>
           <div className="flex-1 bg-white/80 backdrop-blur-lg rounded-xl shadow-lg p-6 flex flex-col items-center hover:scale-105 transition">
             <div className="mb-3 bg-blue-400/90 rounded-full p-4 shadow-lg">
@@ -144,7 +144,7 @@ export default function BokaPage() {
                   rows={5}
                   required
                   className="w-full px-4 py-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none transition text-base bg-blue-50 resize-none"
-                  placeholder="Vad vill du prata om?"
+                  placeholder="Vad är dina funderingar?"
                 />
               </div>
               <button
